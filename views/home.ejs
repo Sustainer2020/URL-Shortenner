@@ -1,0 +1,110 @@
+<!-- home.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <!-- Include necessary CSS files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="/path/to/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+    <a class="navbar-brand" href="#"><img src="/path/to/logo.png" alt="Logo"></a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <% if (user) { %>
+            <span class="navbar-text">Welcome, <%= user.name %></span>
+            <a class="nav-link" href="/history">My URLs</a>
+            <a class="nav-link" href="/logout">Logout</a>
+          <% } else { %>
+            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/signup">Register</a>
+          <% } %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- URL Shortener Form -->
+  <div class="container">
+    <h2 class="text-center">URL Shortener</h2>
+    <form id="shortenForm" class="text-center">
+      <div class="form-group">
+        <label for="urlInput">URL:</label>
+        <input type="text" class="form-control" id="urlInput" placeholder="Enter URL" required>
+      </div>
+      <div class="form-group">
+        <label for="aliasInput">Alias:</label>
+        <input type="text" class="form-control" id="aliasInput" placeholder="Enter Alias">
+      </div>
+      <button type="submit" class="btn btn-primary">Shorten</button>
+    </form>
+    <div id="shortenedURLs" class="mt-4">
+      <!-- Display shortened URLs and buttons here dynamically -->
+    </div>
+  </div>
+
+  <!-- Include necessary JavaScript files -->
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="/path/to/script.js"></script>
+  <script>
+    // Handle form submission
+    $('#shortenForm').submit(function(e) {
+      e.preventDefault();
+      var url = $('#urlInput').val();
+      var alias = $('#aliasInput').val();
+
+      // Make AJAX request to backend API endpoint
+      $.ajax({
+        url: '/api/shorten',
+        method: 'POST',
+        data: { url: url, alias: alias },
+        success: function(response) {
+          var shortenedURL = response.shortenedURL;
+          var alias = response.alias;
+          var cardHTML = `
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">${alias ? alias : 'Your Previous Shortened URL'}</h5>
+                <p class="card-text">${shortenedURL}</p>
+                <div class="btn-group">
+                  <button class="btn btn-primary btn-copy" data-url="${shortenedURL}">
+                    Copy to Clipboard
+                    <svg class="icon">
+                      <!-- Add appropriate SVG icon for copy to clipboard button -->
+                    </svg>
+                  </button>
+                  <a href="${shortenedURL}" class="btn btn-success" target="_blank">
+                    Visit URL
+                    <svg class="icon">
+                      <!-- Add appropriate SVG icon for visit URL button -->
+                    </svg>
+                  </a>
+                  <button class="btn btn-info btn-qr" data-url="${shortenedURL}">
+                    QR Code
+                    <svg class="icon">
+                      <!-- Add appropriate SVG icon for QR code button -->
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+          $('#shortenedURLs').prepend(cardHTML);
+          $('#urlInput').val('');
+          $('#aliasInput').val('');
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

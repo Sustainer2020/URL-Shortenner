@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>History</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="stylesheet" href="/style/style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <a class="navbar-brand logo-img" href="/"><img src="" alt="Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/history">My URLs</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login" onclick="showLogin()">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/signup">Register</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <div class="history">
+            <form id="search-form" onsubmit="searchURLs(event)">
+                <input type="text" name="search" id="search-input">
+                <button type="submit" id="search-button">Search</button>
+            </form>
+            <div id="urls-container">
+                <% if(urls.length > 0){ %>
+                <% urls.forEach((url,index) => { %>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Alias: <%= url.shortId %></h5>
+                        <p class="card-text">Original URL: <%= url.redirectURL %></p>
+                        <p class="card-text">Clicks: <%= url.visitHistory.length %></p>
+                        <button class="btn btn-primary" onclick="generateQRCode('<%= url.shortId %>')">Generate QR Code</button>
+                        <button class="btn btn-primary" onclick="copyToClipboard('<%= url.shortId %>')">Copy URL</button>
+                        <button class="btn btn-danger" onclick="deleteURL('<%= url.shortId %>')">Delete</button>
+                    </div>
+                </div>
+                <% }) %>
+                <% } else { %>
+                <p>No URLs found.</p>
+                <% } %>
+            </div>
+        </div>
+        <script src="/js/script.js"></script>
+    </body>
+</html>
