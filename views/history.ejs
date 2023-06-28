@@ -17,7 +17,7 @@
     <body>
         <nav
             class="navbar navbar-expand-lg navbar-dark position-fixed-top mx-4">
-            <a class="navbar-brand" href="/">MyURL</a>
+            <a class="navbar-brand" href="/">DarkURL</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -63,7 +63,7 @@
         </nav>
         <div class="history-page">
             <div class="top-container">
-                <div class="search-form my-5">
+                <div class="search-form mb-5">
                     <form id="search-form" action="/history" method="get">
                         <input
                             type="text"
@@ -71,7 +71,7 @@
                             name="search"
                             placeholder="Search" />
                         <button type="submit" class="search-button">Search</button>
-                        <button type="reset" class="reset-button">Reset</button>
+                        <a type="reset" class="reset-button text-light" href="/history">Reset</a>
                     </form>
                 </div>
     
@@ -145,13 +145,13 @@
                                 </p>
                             </div>
 
-                            <div class="card-buttons mt-4">
+                            <div class="card-buttons mt-4 d-flex justify-content-space-between">
                                 <a
-                                    class="btn btn-visit btn btn-primary"
+                                    class="btn btn-visit btn btn-primary d-flex align-items-center"
                                     href="/<%= url.shortId %>"
                                     target="_blank">
                                     <i
-                                        class="fa-sharp fa-regular fa-compass fa-xl"></i>
+                                        class="fa-sharp fa-regular fa-compass fa-xl mr-1"></i>
                                     Visit URL</a
                                 >
                                 <button class="d-flex justify-content-center align-items-center btn btn-warning copy-button">
@@ -204,6 +204,7 @@
             </div>
             <% } %>
         </div>
+
 
         <div class="footer position-static">
             <p>&copy; 2023 Sustainer2020. All rights reserved.</p>

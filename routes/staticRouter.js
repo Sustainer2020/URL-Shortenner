@@ -22,6 +22,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
+    res.clearCookie("token");
     return res.redirect("/");
 });
 
@@ -80,6 +81,31 @@ router.get("/history", restrictTo(["Normal", "Admin"]), async (req, res) => {
     });
 });
 
+router.delete('/:shortId', async (req, res) => {
+    const shortId = req.params.shortId;
+    try {
+      const deletedURL = await URL.findOneAndRemove({shortId : shortId});
+      if (!deletedURL) {
+        return res.status(404).json({ message: 'URL not found', });
+      }
+      return res.status(200).json({ message: 'URL deleted successfully' });
+    } catch (error) {
+      return res.status(500).json({ message: 'Hi to delete URL' });
+    }
+  });
+
+  router.delete('/:shortId', async (req, res) => {
+    const shortId = req.params.shortId;
+    try {
+      const deletedURL = await URL.findOneAndRemove({shortId : shortId});
+      if (!deletedURL) {
+        return res.status(404).json({ message: 'URL not found', });
+      }
+      return res.status(200).json({ message: 'URL deleted successfully' });
+    } catch (error) {
+      return res.status(500).json({ message: 'Hi to delete URL' });
+    }
+  });
 
 
 module.exports = router;

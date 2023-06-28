@@ -21,26 +21,16 @@ async function handleGenerateShortURl(req, res) {
         alias: body.alias,
         qrCodeData:qrCodeData,
     });
-    console.log(qrCodeData)
     return res.render('home',{
         id:shortID,
         redirectURL:body.url,
         alias:body.alias,
         qrCodeData:qrCodeData,
+        user:req.user,
     })
    
 }
 
-
-// async function handleGenerateQRCode(req, res) {
-//     const shortId = req.params.shortId;
-//     const qrCodeData = await qrcode.toDataURL(shortId);
-//     console.log(qrCodeData);
-//     return res.json({
-//         "qrCodeData"
-//       });
-    
-// }
 
 async function handleGetAnalytics(req,res){
     const shortId=req.params.shortId;
