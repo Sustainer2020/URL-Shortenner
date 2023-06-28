@@ -181,14 +181,9 @@ body::before{
    
 }
 
-.url-card .qr-code-container {
-  display: none;
-  margin-top: 20px;
-}
 
-.url-card .qr-code-container img {
-  width: 150px; /* Adjust the size as needed */
-}
+
+
 
 /* ---------loginform------------------- */
 .login-form,.signup-form {
@@ -290,7 +285,7 @@ body::before{
   justify-content: center;
   margin-bottom: 20px;
   position: relative;
- 
+  right: 20vh;
 }
 
 .search-input {
@@ -362,6 +357,10 @@ body::before{
   margin-top: 10px;
   font-size: 16px; /* Adjust the font size as needed */
   width: 100%;
+}
+
+.card-body strong{
+  color: var(--primary-color);
 
 }
 
@@ -407,47 +406,78 @@ body::before{
 
 ---------------------animation------------- */
 
-
-.btn-copy {
-  position: relative;
-  transition: color 0.3s ease-in-out;
-}
-
-.btn-copy.copied {
-  color: green;
-}
-
-.btn-copy.copied::after {
-  content: "\f00c Copied!";
-  font-family: "FontAwesome";
-  position: absolute;
-  top: -2px;
-  left: 30px;
+.flash-message {
+  display: inline-block;
+  background-color: #6B4390;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.btn-copy.copied::before {
-  content: "\f00c";
-  font-family: "FontAwesome";
   position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.btn-copy.copied::before,
-.btn-copy.copied::after {
-  font-size: 14px;
+@keyframes flash-message-animation {
+  0% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2);
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
 }
 
-.btn-copy.copied::before {
-  opacity: 0;
+
+/* --------------pagination ---------------------------- */
+.pagination {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  right: 0;
+  
 }
 
-.btn-copy.copied::after {
-  opacity: 1;
-  visibility: visible;
+.pagination a {
+  margin: 0 5px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #6B4390;
+  border-radius: 3px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.pagination a:hover {
+  background-color: #50307A;
+}
+
+.pagination .active {
+  background-color: #8B4BA5;
+}
+
+.pagination .disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.top-container{
+  
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    margin-top: 20px;
+  
+  
 }

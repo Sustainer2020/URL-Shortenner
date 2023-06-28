@@ -1,101 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <title>Homepage</title>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="/style/style.css">
-      <link
-      rel="stylesheet" type="text/css"
-      href='path/to/your/ldbtn.min.css'
-    />
-      <script src="https://kit.fontawesome.com/d3defc4d52.js" crossorigin="anonymous"></script>
+        <title>Homepage</title>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/style/style.css" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="path/to/your/ldbtn.min.css" />
+        <script
+            src="https://kit.fontawesome.com/d3defc4d52.js"
+            crossorigin="anonymous"></script>
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg navbar-dark position-fixed-top mx-4">
-        <a class="navbar-brand" href="/">MyURL</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto d-flex align-items-center">
-            <% if (locals.user) { %>
-              <li class="nav-item">
-                <a class="nav-link btn-outline-primary text-light border-0 rounded" href="/"><%= user.name %></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn-primary text-light" href="/history">My URLs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light logout p-1" href="/logout">Logout</a>
-              </li>
-            <% } else { %>
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/signup">Register</a>
-              </li>
-            <% } %>
-          </ul>
-        </div>
-      </nav>
-      <div class="history-page">
-        <div class="search-form my-5">
-          <form id="search-form" action="/history" method="get">
-            <input type="text" class="search-input" name="search" placeholder="Search">
-            <button type="submit" class="search-button">Search</button>
-            <button type="reset" class="reset-button">Reset</button>
-          </form>
-        </div>
-        
-        <% if (locals.urls) { %>
-          <div class="cards-container">
-            <% urls.forEach(function(url) { %>
-              <div class="card">
-                <div class="card-header">
-                  <h2 class="card-heading"><em><%= url.alias %></em></h2>
+        <nav
+            class="navbar navbar-expand-lg navbar-dark position-fixed-top mx-4">
+            <a class="navbar-brand" href="/">MyURL</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto d-flex align-items-center">
+                    <% if (locals.user) { %>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link btn-outline-primary text-light border-0 rounded"
+                            href="/"
+                            ><%= user.name %></a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link btn-primary text-light"
+                            href="/history"
+                            >My URLs</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light logout p-1" href="/logout"
+                            >Logout</a
+                        >
+                    </li>
+                    <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Register</a>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+        <div class="history-page">
+            <div class="top-container">
+                <div class="search-form my-5">
+                    <form id="search-form" action="/history" method="get">
+                        <input
+                            type="text"
+                            class="search-input"
+                            name="search"
+                            placeholder="Search" />
+                        <button type="submit" class="search-button">Search</button>
+                        <button type="reset" class="reset-button">Reset</button>
+                    </form>
                 </div>
-                <div class="info-url">
-                  <div class="card-body">
-                    <div class="card-links">
-                      <p class="shortid">Shortened URL: <span class="url-text">http://localhost:8001/<%= url.shortId %></span></p>
-                      <p class="original-url">Original URL: <br><%= url.redirectURL %></p>
-                      <p class="clicks-num">No. of Clicks : <%= url.visitHistory.length %></p>
-                    </div>
-
-                    <div class="card-buttons mt-4">
-                      <a class="btn btn-visit btn btn-primary" href="http://localhost:8001/<%= url.shortId %>" target="_blank"> <i class="fa-sharp fa-regular fa-compass fa-xl"></i> Visit URL</a>
-                      <button class="btn btn-copy btn btn-warning btn-copy" onclick="copyToClipboard(event)"><i class="fa fa-clone fa-xl"> </i> Copy</button>  
-                     
-                      <button class="btn btn-qr btn btn-dark d-flex align-items-center" onclick="displayQRCode()"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-qr-code mr-1" viewBox="0 0 16 16">
-                        <path d="M2 2h2v2H2V2Z"/>
-                        <path d="M6 0v6H0V0h6ZM5 1H1v4h4V1ZM4 12H2v2h2v-2Z"/>
-                        <path d="M6 10v6H0v-6h6Zm-5 1v4h4v-4H1Zm11-9h2v2h-2V2Z"/>
-                        <path d="M10 0v6h6V0h-6Zm5 1v4h-4V1h4ZM8 1V0h1v2H8v2H7V1h1Zm0 5V4h1v2H8ZM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8H6Zm0 0v1H2V8H1v1H0V7h3v1h3Zm10 1h-1V7h1v2Zm-1 0h-1v2h2v-1h-1V9Zm-4 0h2v1h-1v1h-1V9Zm2 3v-1h-1v1h-1v1H9v1h3v-2h1Zm0 0h3v1h-2v1h-1v-2Zm-4-1v1h1v-2H7v1h2Z"/>
-                        <path d="M7 12h1v3h4v1H7v-4Zm9 2v2h-3v-1h2v-1h1Z"/>
-                      </svg>
-                       QR Code</button>
-                      <button class="btn btn-delete btn btn-danger d-flex align-items-center" onclick="deleteURL()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3 mr-1" viewBox="0 0 16 16">
-                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                      </svg>
-                        Delete</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <% }); %>
-          </div>
-        <% } %>
-      </div>
-
-      <div class="footer position-static">
-        <p>&copy; 2023 Sustainer2020. All rights reserved.</p>
-      </div>
     
-      <script src="/js/script.js"></script>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-      
+                <div class="pagination ">
+                    <% if (currentPage > 1) { %>
+                    <a href="/history?page=<%= currentPage - 1 %>"
+                        >&laquo; Previous</a
+                    >
+                    <% } else { %>
+                        <a class="disabled">&laquo; Previous</a>
+                      <% } %> 
+                    <% let startPage = Math.max(1, currentPage - 2); %> 
+                    <%
+                    let endPage = Math.min(totalPages, startPage +4 ); %> 
+                   
+                   <% if(startPage > 1) { %>
+                    <a href="/history?page=1">1</a>
+
+                    <% if (startPage > 2) { %>
+                    <span>...</span>
+                    <% } %> 
+                    <% } %> 
+                    <% for (let i = startPage; i <= endPage; i++) { %>
+                         <% if (i === currentPage) { %>
+                         <a href="/history?page=<%= i %>" class="active btn-primary"
+                        ><%= i %></a>
+                       <% } else { %>
+                    <a href="/history?page=<%= i %>"><%= i %></a>
+                       <% } %>
+                    <% } %> 
+
+                    <% if (endPage < totalPages) { %> 
+                        <% if (endPage< totalPages - 1) { %>
+                        <span>...</span>
+                       <% } %>
+                      <a href="/history?page=<%= totalPages %>"><%= totalPages %></a>
+                      <% } %> 
+                      <% if (currentPage < totalPages) { %>
+                      <a href="/history?page=<%= currentPage + 1 %>">Next &raquo;</a>
+                      <% } else { %>
+                        <a class="disabled">Next &raquo;</a>
+                      <% } %>
+
+                </div>
+            </div>
+
+            <% if (locals.urls) { %>
+            <div class="cards-container">
+                <% urls.forEach(function(url) { %>
+                <div class="card copytar">
+                    <div class="card-header d-flex align-items-center justify-content-center">
+                        <img class="favicon" src="" alt="Favicon">
+                        <h2 class="card-heading"><em><%= url.alias %></em></h2>
+                    </div>
+                    <div class="info-url">
+                        <div class="card-body">
+                            <div class="card-links">
+                                <p >
+                                    <strong>Shortened URL:</strong>
+                                    <span class="url-text shortid"
+                                        >http://localhost:8001/<%= url.shortId
+                                        %></span
+                                    >
+                                </p>
+                                <p class="original-url" >
+                                    <strong>Original URL:</strong> <br/><span class="org-url"><%= url.redirectURL %></span>
+                                </p>
+                                <p class="clicks-num">
+                                    <strong>No. of Clicks :</strong> <%= url.visitHistory.length
+                                    %>
+                                </p>
+                            </div>
+
+                            <div class="card-buttons mt-4">
+                                <a
+                                    class="btn btn-visit btn btn-primary"
+                                    href="/<%= url.shortId %>"
+                                    target="_blank">
+                                    <i
+                                        class="fa-sharp fa-regular fa-compass fa-xl"></i>
+                                    Visit URL</a
+                                >
+                                <button class="d-flex justify-content-center align-items-center btn btn-warning copy-button">
+                                    <div>
+                                    <i class="fa fa-clone fa-xl mr-1"> </i>
+                                  </div> Copy</button>
+
+                                <button
+                                    class="btn btn-qr btn btn-dark d-flex align-items-center"
+                                    onclick="displayQRCode(event)">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="currentColor"
+                                        class="bi bi-qr-code mr-1"
+                                        viewBox="0 0 16 16">
+                                        <path d="M2 2h2v2H2V2Z" />
+                                        <path
+                                            d="M6 0v6H0V0h6ZM5 1H1v4h4V1ZM4 12H2v2h2v-2Z" />
+                                        <path
+                                            d="M6 10v6H0v-6h6Zm-5 1v4h4v-4H1Zm11-9h2v2h-2V2Z" />
+                                        <path
+                                            d="M10 0v6h6V0h-6Zm5 1v4h-4V1h4ZM8 1V0h1v2H8v2H7V1h1Zm0 5V4h1v2H8ZM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8H6Zm0 0v1H2V8H1v1H0V7h3v1h3Zm10 1h-1V7h1v2Zm-1 0h-1v2h2v-1h-1V9Zm-4 0h2v1h-1v1h-1V9Zm2 3v-1h-1v1h-1v1H9v1h3v-2h1Zm0 0h3v1h-2v1h-1v-2Zm-4-1v1h1v-2H7v1h2Z" />
+                                        <path
+                                            d="M7 12h1v3h4v1H7v-4Zm9 2v2h-3v-1h2v-1h1Z" />
+                                    </svg>
+                                    QR Code
+                                </button>
+                                <button
+                                    class="btn delete-btn btn btn-danger d-flex align-items-center"
+                                    data-shortid=<%=url.shortId  %>>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="currentColor"
+                                        class="bi bi-trash3 mr-1"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                    </svg>
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            <% } %>
+        </div>
+
+        <div class="footer position-static">
+            <p>&copy; 2023 Sustainer2020. All rights reserved.</p>
+        </div>
+
+        <script src="/js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/favicon.js/dist/favicon.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </body>
 </html>

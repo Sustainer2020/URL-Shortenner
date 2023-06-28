@@ -1,6 +1,7 @@
 const shortid = require("shortid");
 const URL = require("../models/url.js");
 const router = require("../routes/url.js");
+const qrcode=require("qrcode")
 
 
 //This funciton return the ShortID
@@ -10,7 +11,7 @@ async function handleGenerateShortURl(req, res) {
     const shortID = shortid.generate(7);
     //session-based storage for URLs when a user is not logged in:
    let createdby=req.user ? req.user._id : req.cookies?.uid;
-
+   const qrCodeData = await qrcode.toDataURL(`http://localhost:8001/<%= ${shortID} %>`);
     await URL.create({
         shortId: shortID,
         redirectURL: body.url,
@@ -18,15 +19,28 @@ async function handleGenerateShortURl(req, res) {
        // createdBy:req.user._id, 
        createdBy:createdby,
         alias: body.alias,
+        qrCodeData:qrCodeData,
     });
-    
+    console.log(qrCodeData)
     return res.render('home',{
         id:shortID,
         redirectURL:body.url,
         alias:body.alias,
+        qrCodeData:qrCodeData,
     })
    
 }
+
+
+// async function handleGenerateQRCode(req, res) {
+//     const shortId = req.params.shortId;
+//     const qrCodeData = await qrcode.toDataURL(shortId);
+//     console.log(qrCodeData);
+//     return res.json({
+//         "qrCodeData"
+//       });
+    
+// }
 
 async function handleGetAnalytics(req,res){
     const shortId=req.params.shortId;
@@ -36,7 +50,6 @@ async function handleGetAnalytics(req,res){
         analytics: result.visitHistory,
     })
 }
-
 
 
 
@@ -58,5 +71,5 @@ async function handleGetAnalytics(req,res){
 // }
 
 module.exports= {
-    handleGenerateShortURl,handleGetAnalytics,
+    handleGenerateShortURl,handleGetAnalytics
 };

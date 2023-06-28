@@ -19,6 +19,9 @@ const urlSchema = new mongoose.Schema(
         alias: {
             type: String,
         },
+        qrCodeData:{
+            type:String,
+        }
     },
     { timestamps: true }
 );

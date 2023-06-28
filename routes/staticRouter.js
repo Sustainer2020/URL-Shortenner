@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const URL = require("../models/url");
 const { restrictTo } = require("../middlewares/auth");
-const clipboard=require('clipboard')
 const qrCode=require('qrcode')
 
 router.get("/", async (req, res) => { 
@@ -23,51 +22,61 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-    res.clearCookie("token");
     return res.redirect("/");
 });
 
-router.get("/history", restrictTo(["Admin","Normal"]), async (req, res) => {
-    let allURLs;
+router.get("/history", restrictTo(["Normal", "Admin"]), async (req, res) => {
     const searchQuery = req.query.search;
-    // fetching based on session ID for non-logged in user
-    // if(!req.user){
-    //     const createdby = req.cookies?.uid;
-    //     allURLs = await URL.find({ createdBy: createdby }).exec();
-    // }
-    // fetching for Logged in user based on _id
-   // else{
-        if (req.user.role == "Admin") {
-            if (searchQuery) {
-                 allURLs = await URL.find({
-                    $or: [
-                        { shortId: { $regex: ".*" + searchQuery + ".*" } },
-                        { redirectURL: { $regex: ".*" + searchQuery + ".*" } },
-                        { alias: { $regex: ".*" + searchQuery + ".*" } },
-                    ],
-                });
-            } else {
-                 allURLs = await URL.find({});
-            }
-        } else {
-            if(searchQuery){
-                allURLs = await URL.find({
-                    createdBy: req.user._id,
-                    $or: [
-                        { shortId: { $regex: ".*" + searchQuery + ".*" } },
-                        { redirectURL: { $regex: ".*" + searchQuery + ".*" } },
-                        { alias: { $regex: ".*" + searchQuery + ".*" } },
-                    ],
-                }).exec();
-            }
-            else{
-                allURLs = await URL.find({createdBy: req.user._id})
-            }
-        }
-   // }
+    const page = parseInt(req.query.page) || 1; 
+    const limit = 6; 
+
+    let query = {};
+    if (searchQuery) {
+        query = {
+            $or: [
+                { shortId: { $regex: ".*" + searchQuery + ".*" } },
+                { redirectURL: { $regex: ".*" + searchQuery + ".*" } },
+                { alias: { $regex: ".*" + searchQuery + ".*" } },
+            ],
+        };
+    }
+
+    const totalURLs = await URL.countDocuments(query); 
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(totalURLs / limit);
+
+    // Ensure the current page is within valid range
+    if (page < 1 || page > totalPages) {
+        return res.redirect("/history?page=1");
+    }
+
+    const skip = (page - 1) * limit; // Calculate the number of URLs to skip
+
+    let allURLs;
+    if (req.user.role === "Admin") {
+        allURLs = await URL.find(query)
+            .sort({ createdAt: -1 }) // Sort in descending order by createdAt
+            .skip(skip)
+            .limit(limit)
+            .exec();
+    } else {
+        allURLs = await URL.find({ createdBy: req.user._id, ...query })
+            .sort({ createdAt: -1 }) // Sort in descending order by createdAt
+            .skip(skip)
+            .limit(limit)
+            .exec();
+    }
+
+    if (totalURLs < (totalPages - 2) * limit) {
+        totalPages = Math.ceil(totalURLs / limit);
+    }
+
     return res.render("history", {
         urls: allURLs,
         user: req.user,
+        totalPages: totalPages,
+        currentPage: page,
     });
 });
 
