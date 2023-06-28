@@ -8,7 +8,6 @@ async function handleGenerateShortURl(req, res) {
     const body = req.body;
     if (!body.url) return res.status(400).json({ error: "Url is required !!" });
     const shortID = shortid.generate(7);
-
     //session-based storage for URLs when a user is not logged in:
    let createdby=req.user ? req.user._id : req.cookies?.uid;
 
@@ -23,9 +22,10 @@ async function handleGenerateShortURl(req, res) {
     
     return res.render('home',{
         id:shortID,
-        redirectURL:body.url
+        redirectURL:body.url,
+        alias:body.alias,
     })
-    //return res.json({ id: shortID });
+   
 }
 
 async function handleGetAnalytics(req,res){

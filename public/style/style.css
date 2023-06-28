@@ -1,196 +1,453 @@
-/* Navbar Styles */
+:root {
+  --primary-color: #8B4BA5;
+  --secondary-color: #6B4390;
+  --tertiary-color: #50307A;
+  --accent-color: #834590;
+  --dark-color: #160135;
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  position: relative;
+}
+
+body::before{
+  content: "";
+  position: absolute;
+  top:0;
+  left:0;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)), url('../images/4393815_3154.jpg');
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center center;
+  background-attachment: fixed;
+
+}
+
 .navbar {
+  background: linear-gradient(to center, var(--primary-color), var(--secondary-color), var(--tertiary-color));
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand {
+  color: #fff;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: white;
+  font-weight: bold;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.nav-link:hover {
+  background-color: var(--primary-color);
+}
+
+.nav-link.logout:hover{
+  background-color: red;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+.nav-item {
+  margin-left: 10px;
+}
+
+.footer {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  background-image: linear-gradient(45deg, #FF416C, #FF4B2B);
-  transition: background-image 0.3s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  text-align: center;
 }
 
-.navbar.scrolled {
-  background-image: linear-gradient(45deg, #FF6A88, #FF7B5F);
-}
-
-.navbar-logo {
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
-  margin-right: 20px;
-}
-
-.navbar-menu {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  padding: 0;
+.footer p {
+  color: black;
   margin: 0;
 }
 
-.navbar-menu li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-  transition: color 0.3s ease-in-out;
+
+
+.url-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 40px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  width: auto; /* Adjust the width as needed */
+  max-width: 90%; /* Limit the maximum width if necessary */
 }
 
-.navbar-menu li a:hover {
-  color: #f8f8f8;
+.url-form h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 24px; /* Increase the font size as needed */
 }
 
-/* URL Shortener Styles */
-.url-shortener {
-  padding: 80px 0;
-  background-color: #f8f8f8;
+.url-form .form-group {
+  margin-bottom: 20px;
 }
 
-.form-group {
-  display: flex;
-  gap: 10px;
-}
-
-.form-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.url-form .form-input {
   width: 100%;
-  font-size: 16px;
+  padding: 12px;
+  font-size: 16px; /* Increase the font size as needed */
 }
 
-.form-button {
-  background-color: #FF416C;
-  color: #fff;
-  border: none;
+.url-form .btn-shorten {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px; /* Increase the font size as needed */
+}
+
+.url-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 40px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  width: 500px; /* Adjust the width as needed */
+  max-width: 90%; /* Limit the maximum width if necessary */
+}
+
+.url-card h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 24px; /* Increase the font size as needed */
+}
+
+.url-card .url-info {
+  margin-bottom: 20px;
+}
+
+.url-card .url-info p {
+  margin-bottom: 10px;
+}
+
+.url-card .url-info strong {
+  color: var(--secondary-color);
+}
+
+.url-card .url-info span {
+  color: var(--primary-color);
+}
+
+.url-card .url-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-basis:33%;
+}
+
+
+.url-card .btn,.url-card .a {
+  width: 100%; /* Adjust the width as needed */
+  height: 40px; /* Adjust the height as needed */
+  font-size: 15px; /* Adjust the font size as needed */
+  margin:0 5px;
   border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.form-button:hover {
-  background-color: #FF4B2B;
-  transform: scale(1.1);
+#shorten{
+   font-size: 20px;
+   height: 50px;
+   
 }
 
-/* Shortened URL Styles */
-.shortened-url {
-  padding: 80px 0;
-  background-color: #f8f8f8;
+.url-card .qr-code-container {
+  display: none;
+  margin-top: 20px;
+}
+
+.url-card .qr-code-container img {
+  width: 150px; /* Adjust the size as needed */
+}
+
+/* ---------loginform------------------- */
+.login-form,.signup-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 40px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  width: 400px; /* Adjust the width as needed */
+  max-width: 90%; /* Limit the maximum width if necessary */
+}
+
+.login-form h2 , .signup-form h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 40px; /* Increase the font size as needed */
+}
+
+.login-form .form-group , .signup-form .form-group{
+  margin-bottom: 20px;
+}
+
+.login-form .form-control , .signup-form .form-control{
+  width: 100%;
+  height: 40px; /* Adjust the height as needed */
+  padding: 0 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#passkey{
+  display: relative;
+}
+
+#show-pass{
+  position: absolute;
+  top: 45%;
+  right: 12%;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5px;
+  height: auto;
+}
+
+.login-form .btn-login , .signup-form .btn-login{
+  width: 100%;
+  height: 40px; /* Adjust the height as needed */
+  font-size: 20px; /* Adjust the font size as needed */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.login-form .signup-link , .signup-form .login-link {
+  margin-top: 25px;
+  color: var(--primary-color);
+  font-size: 18px; /* Adjust the font size as needed */
+}
+
+#show-pass-signup{
+  position: absolute;
+  top: 46%;
+  right: 12%;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5px;
+  height: auto;
+}
+
+#show-pass2-signup{
+  position: absolute;
+  top: 58.2%;
+  right: 12%;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5px;
+  height: auto;
+}
+
+/*-------------------------------------- --------------history---------------------------------------------- */
+.history-page{
+  padding: 20px;
+}
+
+
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+ 
+}
+
+.search-input {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 4px;
+  border: none;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8));
+  color: #333;
+ 
+}
+
+.search-button,
+.reset-button {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.reset-button{
+  background-color: orangered;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
 }
 
 .card {
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
   padding: 20px;
-  margin-bottom: 20px;
-}
-
-.card h2 {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.card p {
-  word-break: break-all;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.button {
-  background-color: #FF4B2B;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.button:hover {
-  background-color: #FF583D;
-  transform: scale(1.1);
-}
-
-.button-copy {
-  background-color: #FFA400;
-}
-
-.button-visit {
-  background-color: #0066FF;
-}
-
-.button-qr {
-  background-color: #FF5722;
-}
-
-
-
-.container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  margin-top: 0;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-}
-
-input[type="url"],
-input[type="alias"] {
+  box-sizing: border-box;
+  height: 100%;
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
-.toggle-password {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-}
-
-.submit-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #0056b3;
-}
-
-.signup-link {
+.card-header{
   text-align: center;
+ 
+ 
+}
+
+.card-header em{
+  font-size: 30px;
+}
+
+.card-header img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.card-heading {
+  color: var(--primary-color);
+  font-size: 18px; /* Increase the font size as needed */
+  margin: 0;
+}
+
+.card-body {
+  margin-top: 10px;
+  font-size: 16px; /* Adjust the font size as needed */
+  width: 100%;
+
+}
+
+.shortid,
+.original-url {
+  margin: 10px 0;
+
+}
+
+.card-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin-top: 10px;
 }
 
-.signup-link a {
-  color: #007bff;
+.btn {
+  padding: 8px 12px;
+  font-size: 14px; /* Adjust the font size as needed */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.info-url{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+#favico-img{
+  width: 24px;
+  height: 24px;
+
+}
+
+.card-links{
+  height: 150px;
+}
+ 
+
+/* 
+
+---------------------animation------------- */
+
+
+.btn-copy {
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+.btn-copy.copied {
+  color: green;
+}
+
+.btn-copy.copied::after {
+  content: "\f00c Copied!";
+  font-family: "FontAwesome";
+  position: absolute;
+  top: -2px;
+  left: 30px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.btn-copy.copied::before {
+  content: "\f00c";
+  font-family: "FontAwesome";
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.btn-copy.copied::before,
+.btn-copy.copied::after {
+  font-size: 14px;
+}
+
+.btn-copy.copied::before {
+  opacity: 0;
+}
+
+.btn-copy.copied::after {
+  opacity: 1;
+  visibility: visible;
 }

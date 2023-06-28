@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <title>Login</title>
-</head>
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <img src="logo.png" alt="Logo" class="navbar-brand">
-        <h1 class="headline">Welcome to URL Shortener</h1>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <div class="container">
-      <form id="login-form" class="mt-5">
-        <h2 class="mb-4">Login</h2>
-        <div class="form-group">
-          <label for="email">Email ID:</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+    <head>
+      <title>Log In</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/style/style.css">
+      <link
+      rel="stylesheet" type="text/css"
+      href='path/to/your/ldbtn.min.css'
+    />
+      <script src="https://kit.fontawesome.com/d3defc4d52.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-dark position-fixed-top mx-4">
+        <a class="navbar-brand" href="/">MyURL</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto d-flex align-items-center">
+            <% if (locals.user) { %>
+              <li class="nav-item">
+                <a class="nav-link btn-primary text-light border-0 rounded" href="/"><%= user.name %></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="/history">My URLs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light logout p-1" href="/logout">Logout</a>
+              </li>
+            <% } else { %>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="/signup">Sign Up</a>
+              </li>
+            <% } %>
+          </ul>
         </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <div class="input-group">
-            <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
-            <div class="input-group-append">
-              <button type="button" id="toggle-password" class="btn btn-outline-secondary">
-                <i class="fa fa-eye-slash"></i>
-              </button>
+      </nav>
+        <div class="login-form">
+          <h2>Login</h2>
+          <form id="login-form" action="/user/login" method="post">
+            <div class="form-group">
+              <input type="text" class="form-control" id="email" name="email" placeholder="Email ID" required>
             </div>
-          </div>
+            <div class="form-group" id="passkey">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" aria-describedby="password" required> 
+              <button type="button" id="show-pass" class="password-toggle btn btn-outline-secondary" onclick="togglePasswordVisibility()"><i class="fa-sharp fa-solid fa-eye-slash"></i></button>     
+            </div>
+            <button type="submit" class="btn btn-primary btn-login d-flex align-items-center justify-content-center"><p class="m-0">Login</p></button>
+          </form>
+          <p class="signup-link">Haven't Already Registered? <a href="/signup">Sign Up</a></p>
         </div>
-        <div class="form-group">
-          <div class="form-check">
-            <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input">
-            <label for="remember-me" class="form-check-label">Remember me</label>
-          </div>
+        
+        <div class="footer">
+          <p>&copy; 2023 Sustainer2020. All rights reserved.</p>
         </div>
-        <div class="form-group">
-          <a href="#" class="forgot-password">Forgot Password?</a>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign In</button>
-      </form>
-      <div class="signup-link mt-3">
-        <p>Haven't Already Registered? <a href="signup.html">Sign Up</a></p>
-      </div>
-    </div>
-  </main>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="script.js"></script>
-</body>
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    </body>
 </html>
