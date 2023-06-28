@@ -103,13 +103,11 @@ The use of Bootstrap ensures that the web application is aesthetically pleasing 
 
 ## JavaScript Copy to Clipboard Button
 
-To enhance user convenience, the DarkURL web application includes a JavaScript-based "Copy to
-
-Clipboard" button. This button allows users to quickly copy the shortened URL to their clipboard with a single click, eliminating the need for manual selection and copying. The JavaScript code binds an event listener to the button, triggering the copy functionality when clicked. This feature streamlines the process of sharing shortened URLs with others, improving usability and saving users valuable time.
+To enhance user convenience, the DarkURL web application includes a JavaScript-based "Copy to Clipboard" button. This button allows users to quickly copy the shortened URL to their clipboard with a single click, eliminating the need for manual selection and copying. The JavaScript code binds an event listener to the button, triggering the copy functionality when clicked. This feature streamlines the process of sharing shortened URLs with others, improving usability and saving users valuable time.
 
 ## Key Takeaways
 
--   Comprehensive Tech Stack: HTML, CSS, Bootstrap, JavaScript, Node.js, Express.js, MongoDB, and Azure.
+-   Comprehensive Tech Stack: HTML, CSS, Bootstrap, JavaScript, Node.js, Express.js, MongoDB, and Render.
 -   Structured Project Organization: Well-organized directory structure for easy navigation and maintenance.
 -   Powerful Data Models: URL and User models for efficient data storage and retrieval.
 -   Interactive Views: History, Login, Signup, and Home views for seamless user experience.
