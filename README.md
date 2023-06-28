@@ -2,6 +2,9 @@
 
 DarkURL is a powerful web application that allows users to shorten long URLs and manage them conveniently. With its user-friendly interface and robust functionality, DarkURL simplifies the process of creating and tracking shortened URLs. This document provides a comprehensive overview of the project, including the tech stack used, project structure, models schema, views, and key features.
 
+## Visit the application
+- [Dark URL](https://darkurl.onrender.com)
+
 ## Table of Contents
 
 **Table of Contents**
@@ -32,7 +35,7 @@ The DarkURL web application leverages a wide range of cutting-edge technologies 
 
 -   **MongoDB**: A popular NoSQL database system that offers scalability, flexibility, and high performance. MongoDB stores the application's data, such as shortened URLs and user information, in a document-oriented format.
 
--   **Azure**: A leading cloud computing platform that provides a wide range of services for hosting, deploying, and scaling applications. Azure offers a reliable and secure infrastructure for running web applications, ensuring high availability and fault tolerance.
+-   **Render**: A leading cloud computing platform that provides a wide range of services for hosting, deploying, and scaling applications. Render offers a reliable and secure infrastructure for running web applications, ensuring high availability and fault tolerance.
 
 ## Project Structure
 
@@ -100,13 +103,11 @@ The use of Bootstrap ensures that the web application is aesthetically pleasing 
 
 ## JavaScript Copy to Clipboard Button
 
-To enhance user convenience, the DarkURL web application includes a JavaScript-based "Copy to
-
-Clipboard" button. This button allows users to quickly copy the shortened URL to their clipboard with a single click, eliminating the need for manual selection and copying. The JavaScript code binds an event listener to the button, triggering the copy functionality when clicked. This feature streamlines the process of sharing shortened URLs with others, improving usability and saving users valuable time.
+To enhance user convenience, the DarkURL web application includes a JavaScript-based "Copy to Clipboard" button. This button allows users to quickly copy the shortened URL to their clipboard with a single click, eliminating the need for manual selection and copying. The JavaScript code binds an event listener to the button, triggering the copy functionality when clicked. This feature streamlines the process of sharing shortened URLs with others, improving usability and saving users valuable time.
 
 ## Key Takeaways
 
--   Comprehensive Tech Stack: HTML, CSS, Bootstrap, JavaScript, Node.js, Express.js, MongoDB, and Azure.
+-   Comprehensive Tech Stack: HTML, CSS, Bootstrap, JavaScript, Node.js, Express.js, MongoDB, and Render.
 -   Structured Project Organization: Well-organized directory structure for easy navigation and maintenance.
 -   Powerful Data Models: URL and User models for efficient data storage and retrieval.
 -   Interactive Views: History, Login, Signup, and Home views for seamless user experience.
