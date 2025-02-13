@@ -13,7 +13,7 @@ const app = express();
 const port = 8001;
 
 
-connectToMongoDB("mongodb+srv://sustainer2021:urlshortener2023@cluster0.dvtpf96.mongodb.net/").then(()=>{
+connectToMongoDB("mongodb+srv://sustainer2021:<db_password>@cluster0.byuxh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0").then(()=>{
   console.log("MongoDB Connected")
 });
 
