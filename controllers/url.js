@@ -11,7 +11,7 @@ async function handleGenerateShortURl(req, res) {
     const shortID = shortid.generate(7);
     //session-based storage for URLs when a user is not logged in:
    let createdby=req.user ? req.user._id : req.cookies?.uid;
-   const qrCodeData = await qrcode.toDataURL(`http://localhost:8001/<%= ${shortID} %>`);
+   const qrCodeData = await qrcode.toDataURL(`http://darkurl.onrender.com/<%= ${shortID} %>`);
     await URL.create({
         shortId: shortID,
         redirectURL: body.url,
